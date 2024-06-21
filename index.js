@@ -85,14 +85,14 @@
 
 // SERVER
 
-const http = require('http');
+// const http = require('http');
 
-const server = http.createServer((req,res)=>
-{
-    res.end("Server started");
-})
+// const server = http.createServer((req,res)=>
+// {
+//     res.end("Server started");
+// })
 
-server.listen(3000);
+// server.listen(3000);
 
 
 // http, fs and a lot of packages are pre-installed on nodejs
@@ -106,3 +106,46 @@ server.listen(3000);
 
 
  
+
+// EXPRESS
+// express is a framework-> predefined steps, like first create server then routes etc
+// react is a library-> provides developer with tools now the user can use it however they want.
+// express manages everything from receiving the request and giving the resonse.
+
+const express = require('express');
+const app = express();
+
+
+// app.get(route, routehandler)
+// app.get('/',(req,res)=>
+// {
+//     res.send('Hello World');
+// })
+
+// app.listen(3000);
+
+
+// Middleware
+// anything which you (developer) want to perform before moving to routes
+// e.g getting user details and later pass on to the routes
+// request(user) --> middleware --> route  <-- response
+
+// so every middleware runs before routes 
+// and middlewares are written using (  .use  )
+
+app.use( (req,res,next)=>
+{
+    console.log(`control is with middleware`);
+    next();
+})
+
+
+// next() handles the control to the routes
+// if we do not call next the control will never forwarded to the routes
+
+app.get('/', (req,res)=>
+{
+    res.send(`control is with routes`)
+})
+
+app.listen(3000);
