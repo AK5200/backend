@@ -149,3 +149,17 @@ app.get('/', (req,res)=>
 })
 
 app.listen(3000);
+
+
+
+
+
+// cookie and session
+// when user requests anything from user say user wants a picture from facebook,
+// user request will reach fb server and fb will ask user who r they? login.
+// and once user loges in fb server will send the requested picture and as soon as the picture is sent 
+// thee connection will get cut and say after a minute you want to like a photo then fb will again ask you to signup
+// that's where cookie comes in, when the first request is sent to fb server, fb server responds with an additional identifier,
+// which is stored at the user's end that is called cookie.
+// now the user request will go along with the cookie and the server will recognize the user.
+// this whole thing is called a session.
