@@ -162,4 +162,15 @@ app.listen(3000);
 // that's where cookie comes in, when the first request is sent to fb server, fb server responds with an additional identifier,
 // which is stored at the user's end that is called cookie.
 // now the user request will go along with the cookie and the server will recognize the user.
-// this whole thing is called a session.
+// this whole thing from one login to one logout is called a session.
+
+
+
+
+// middlewares
+// we usually use middlewares like .json and urlencoded
+// becoz the data which user sends is converted into blob in converting back to json and url we need middlewares
+
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
