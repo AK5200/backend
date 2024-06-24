@@ -112,8 +112,8 @@
 // react is a library-> provides developer with tools now the user can use it however they want.
 // express manages everything from receiving the request and giving the resonse.
 
-const express = require('express');
-const app = express();
+// const express = require('express');
+// const app = express();
 
 
 // app.get(route, routehandler)
@@ -133,22 +133,22 @@ const app = express();
 // so every middleware runs before routes 
 // and middlewares are written using (  .use  )
 
-app.use( (req,res,next)=>
-{
-    console.log(`control is with middleware`);
-    next();
-})
+// app.use( (req,res,next)=>
+// {
+//     console.log(`control is with middleware`);
+//     next();
+// })
 
 
 // next() handles the control to the routes
 // if we do not call next the control will never forwarded to the routes
 
-app.get('/', (req,res)=>
-{
-    res.send(`control is with routes`)
-})
+// app.get('/', (req,res)=>
+// {
+//     res.send(`control is with routes`)
+// })
 
-app.listen(3000);
+// app.listen(3000);
 
 
 
@@ -171,6 +171,58 @@ app.listen(3000);
 // we usually use middlewares like .json and urlencoded
 // becoz the data which user sends is converted into blob in converting back to json and url we need middlewares
 
+// app.use(express.json());
+// app.use(express.urlencoded({extended:true}));
+
+
+
+
+
+// 24-06-24
+
+const express = require('express');
+const app = express();
+const path = require('path');
+
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
+
+app.use(express.static(path.join(__dirname,'public')));
+// express ko bolre saare static files __dirname/public mae hai
+// __dirname location till root folder in this project and then /public se publc folder.
+// ejs files mae path mae public add nahi karenge
+
+
+
+app.set('view engine', 'ejs');
+// what will backend render (i.e show) that is ejs (views)  ejs--frontend
+
+app.get("/", (req,res)=>
+{
+    // res.send("hello there")
+    // here for rendering an entire fire we just need to add that file in views folder and .render will automatically render it from views (ejs property)
+    // but ejs file honi chahiye
+    res.render("index");
+
+})
+
+
+// : means dynamic route, here anything can come after : (acts as a variable)
+// e.g /about/anupam  (will work)     /about/anurag
+//and to access we use req.params  (sends an object of all the : variables)
+// specific? req.params.username
+
+app.get("/about/:username", (req,res)=>
+{
+    res.send(`Hey ${req.params.username}`);
+    console.log(req.params);
+    console.log(req.params.username);
+})
+
+app.listen(3000, ()=>
+{
+    console.log("server chalra hai");
+})
+
 
