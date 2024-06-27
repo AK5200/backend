@@ -1,6 +1,0 @@
-// javascript cannot create server on its own
-// Node js ?
-// javascript runtime environment
-// (chrome's v8 engine (c++) and a js wrapper outside it) this complete environment is nodejs.
-
-// npm init brings the power of node to our project's folder

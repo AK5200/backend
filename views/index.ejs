@@ -8,7 +8,38 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
-   
-    <h1>hey there I'm in views  <% let a = 10%><%= a%></h1>
+
+   <div class="main w-full min-h-screen bg-zinc-900 text-white">
+    <div class="form p-10 d-flex gap-3">
+        <form action="/create" method="post">
+        <input class="block p-3 w-full rounded-md mt-3 bg-zinc-800"  type="text" placeholder="Title" name="title" />
+        <textarea class="block p-3 w-full mt-3 rounded-md  bg-zinc-800 resize-none" placeholder="Write your task here..." name="content"></textarea>
+        <input class="hover:bg-green-500 mt-3 cursor-pointer p-3 bg-gray-700 rounded-sm" type="submit" value="Create Task"/>
+        </form>
+    </div>
+
+    <div class="tasks p-10 flex flex-wrap gap-4">
+      <% if(files.length > 0) { %>  
+      <% files.forEach( (val)=>{ %>
+          
+        <div class="task p-3 rounded-md w-72 bg-zinc-800">
+            <div class="flex justify-between">
+            <h1 class="text-white text-3xl tracking-tighter"><%= val.replace(".txt","") %></h1>
+            <a class="text-yellow-300 hover:text-yellow-400" href="/delete/<%=val%>">done</a>
+          </div>
+            <div class="flex justify-between">
+            <a class="text-green-300 hover:text-green-500 " href="/file/<%= val %>">go to task</a>
+            <a class="text-zinc-600 hover:text-zinc-700" href="/edit/<%=val %>">edit </a>
+          </div>
+            </div>
+    
+      <% }) %>
+      <% } else { %>  
+        <h3 class="text-zinc-600 ">create your first task.</h3>
+    <% } %>
+       
+    </div>
+
+   </div>
 </body>
 </html>
